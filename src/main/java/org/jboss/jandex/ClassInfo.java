@@ -45,7 +45,7 @@ import java.util.Map;
  * @author Jason T. Greene
  *
  */
-public final class ClassInfo implements AnnotationTarget {
+public final class ClassInfo implements AnnotationTarget, Comparable<ClassInfo> {
 
     private final DotName name;
     private final Map<DotName, List<AnnotationInstance>> annotations;
@@ -538,6 +538,11 @@ public final class ClassInfo implements AnnotationTarget {
         throw new IllegalArgumentException("Not a type");
     }
 
+    @Override
+    public int compareTo(ClassInfo other) {
+        return this.name.compareTo(other.name);
+    }
+
     void setHasNoArgsConstructor(boolean hasNoArgsConstructor) {
         this.hasNoArgsConstructor = hasNoArgsConstructor;
     }
@@ -625,4 +630,5 @@ public final class ClassInfo implements AnnotationTarget {
     void setFlags(short flags) {
         this.flags = flags;
     }
+
 }
